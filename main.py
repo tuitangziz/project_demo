@@ -6,3 +6,4 @@ if __name__ == "__main__":
 import requests
 
 print(requests.__version__)
+print("Git test")
