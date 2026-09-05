@@ -1,6 +1,6 @@
 """import user_utils
 if __name__ == "__main__":
-    info = user_utils.get_user_info("Tom", 20)
+    info = user_utils.get_user_info("Tom", 20)python -m pip install numpy
     print(f"name={info['name']}")
     print(f"age={info['age']}")"""
 import requests
