@@ -61,7 +61,7 @@ print(scores.argmax(axis=1))
 scores.max()
 print(scores.max(axis=1))"""
 #其实有很多我都是看来你的提示的，不过我没有往前翻你发过的，或者看笔记，不会就多试了几次
-import numpy as np
+"""import numpy as np
 
 data = np.array([
     [170, 60],
@@ -75,3 +75,45 @@ standardized=(data - data_mean)/data_std
 print(standardized)
 print(standardized.mean(axis=0))
 print(standardized.std(axis=0))
+a=np.random.permutation(data)
+print(a)
+np.random.seed(41)
+
+print(np.random.rand(99))"""
+"""import numpy as np
+
+data = np.array([
+    [170, 60],
+    [180, 80],
+    [160, 50],
+    [190, 90],
+    [175, 70]
+])
+np.random.seed(42)#这是不是很巧就是宇宙终极答案hh
+new_data=np.random.permutation(data)
+print(new_data)
+print(data)
+#shuffle修改原数组permutation不修改原数组"""
+import numpy as np
+
+scores = np.array([
+    [80, 90, 70, 85],
+    [60, 75, 85, 70],
+    [95, 88, 92, 96],
+    [50, 65, 55, 58],
+    [78, 82, 80, 76]
+], dtype=float)
+print(scores.shape)
+print(scores.mean(axis=1))
+print(scores.mean(axis=0))
+print(scores.mean(axis=1)[scores.mean(axis=1)>=80])
+print(scores.argmin(axis=1))
+new_scores=scores.copy()
+new_scores[new_scores<60]=0
+standardized=(scores-scores.mean(axis=0))/scores.std(axis=0)
+print(standardized)
+print(standardized.mean(axis=0))#为什么这个的输出不是0 0 0 0
+print(standardized.std(axis=0))
+np.random.seed(42)
+random_scores=np.random.permutation(scores)
+print(random_scores)
