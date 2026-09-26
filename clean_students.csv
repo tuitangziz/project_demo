@@ -1,0 +1,7 @@
+id,name,class_id,score,age,passed,class_name
+1,tom,A,90.0,20.0,True,AI Class
+2,jack,A,60.0,21.0,True,AI Class
+3,alice,B,95.0,19.0,True,Software Class
+4,bob,B,70.0,0.0,True,Software Class
+5,lucy,B,80.0,20.0,True,Software Class
+6,david,A,85.0,22.0,True,AI Class
