@@ -1,4 +1,4 @@
-import pandas as pd
+#import pandas as pd
 
 
 """data = {
@@ -70,7 +70,7 @@ clean_df["name"]=clean_df["name"].str.lower()
 clean_df=clean_df.sort_values("score", ascending=False)
 print(clean_df)"""
 
-df = pd.DataFrame({
+"""df = pd.DataFrame({
     "name": ["Tom", "Jack", "Alice", "Bob", "David", "Lucy"],
     "class": ["A", "A", "B", "B", "A", "B"],
     "gender": ["M", "M", "F", "M", "F", "F"],
@@ -92,4 +92,114 @@ print(df.groupby("class"))#只是映射
 print(df["gender"].value_counts())#第三题
 print(df.groupby(["gender","class"])["score"].mean())#4
 df_better80=df[df["score"]>=80].copy()
-df_better80["gender"].value_counts()
+df_better80["gender"].value_counts()"""
+"""students = pd.DataFrame({
+    "id": [1, 2, 3, 4],
+    "name": ["Tom", "Jack", "Alice", "Bob"]
+})
+
+scores = pd.DataFrame({
+    "id": [3, 1, 2, 5],
+    "score": [95, 90, 60, 100]
+})
+1,2,3
+1,2,3,4
+pd.merge(students,scores,on="id")
+pd.merge(students,scores,on="id",how="left")"""
+#Bob
+#不会，因为左边没有id=5的人
+"""df = pd.DataFrame({
+    "name": ["Tom", "Jack", "Alice", "Bob"],
+    "age": [20, 21, 19, 22],
+    "score": [90, 60, 95, 70]
+})
+df.info()
+print(df.describe())
+df["passed"]=df["score"]>=60
+df=df[df["score"]>=70]
+df=df.sort_values("score", ascending=False)
+df.to_csv("students.csv",index=False)"""
+"""import pandas as pd
+df=pd.read_csv("students.csv")
+cl=pd.read_csv("class.csv")
+print(df.shape)
+print(df.info())
+df.isna().sum()#这个我忘了找你提示
+df_drop=df.drop_duplicates(subset="id").copy()
+df_drop["name"]=df_drop["name"].str.strip()
+df_drop["name"]=df_drop["name"].str.lower()
+df_drop["score"]=df_drop["score"].fillna(df_drop["score"].mean())
+df_drop["age"]=df_drop["age"].fillna(0)
+df_drop["passed"]=df_drop["score"]>=60
+clean_student_class=pd.merge(df_drop,cl,on="class_id",how="left")
+good_students=clean_student_class[clean_student_class["score"]>=70]
+good_students=good_students.sort_values("score", ascending=False)
+df_mean=good_students.groupby("class_name")["score"].mean()
+df_min=good_students.groupby("class_name")["score"].min()
+df_max=good_students.groupby("class_name")["score"].max()
+df_count=good_students.groupby("class_name")["score"].count()
+good_students.to_csv("clean_students.csv",index=False)#很多看了之前写的代码
+pd.concat([df_mean,df_min,df_max,df_count],axis=1).to_csv("class_summary.csv")#网上查的，我看了结果发现我的name没，不懂
+"""
+import pandas as pd
+
+# 1. 读取
+df = pd.read_csv("students.csv")
+cl = pd.read_csv("class.csv")
+
+# 2. 检查
+print(df.shape)
+df.info()
+print(df.isna().sum())
+
+# 3. 去重
+df_drop = df.drop_duplicates(subset=["id"]).copy()
+
+# 4. 字符串清洗
+df_drop["name"] = df_drop["name"].str.strip()
+df_drop["name"] = df_drop["name"].str.lower()
+
+# 5. 填补缺失值
+df_drop["score"] = df_drop["score"].fillna(
+    df_drop["score"].mean()
+)
+
+df_drop["age"] = df_drop["age"].fillna(0)
+
+# 6. 新字段
+df_drop["passed"] = df_drop["score"] >= 60
+
+# 7. 合并班级表
+clean_student_class = pd.merge(
+    df_drop,
+    cl,
+    on="class_id",
+    how="left"
+)
+
+# 8. 筛选 >= 70
+good_students = clean_student_class[
+    clean_student_class["score"] >= 70
+].copy()
+
+# 9. 排序
+good_students = good_students.sort_values(
+    "score",
+    ascending=False
+)
+
+# 10. 班级统计
+class_summary = (clean_student_class.groupby("class_name")["score"].agg(["mean", "max", "min", "count"]) .reset_index())
+#或者
+class_summary = clean_student_class.groupby("class_name")["score"].agg(["mean","max","min","count"])
+# 11. 保存清洗后的完整数据
+clean_student_class.to_csv(
+    "clean_students.csv",
+    index=False
+)
+
+# 12. 保存班级统计
+class_summary.to_csv(
+    "class_summary.csv",
+    index=False
+)

@@ -1,6 +1,8 @@
-name,score,age
-Tom,90,20
-Jack,,21
-Alice,95,19
-Bob,70,
-David,50,20
+id,name,class_id,score,age
+1, Tom ,A,90,20
+2,JACK,A,60,21
+3,alice,B,95,19
+4, Bob,B,70,
+2,JACK,A,60,21
+5,Lucy,B,,20
+6, DAVID ,A,85,22
